@@ -3,6 +3,7 @@ package com.icarumbas.casto.icons
 import com.icarumbas.casto.utils.SvgParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.stereotype.Component
 import java.io.IOException
 import java.nio.file.FileVisitResult
@@ -20,7 +21,7 @@ class SvgIconsParser @Autowired constructor(
     private val svgParser: SvgParser,
 ) {
     fun run() {
-        val svgDir = Path(ClassPathResource("icons/svg").path)
+        val svgDir = DefaultResourceLoader().getResource("icons/svg").file.toPath()
 
         Files.walkFileTree(svgDir, object : SimpleFileVisitor<Path>() {
             override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
@@ -36,7 +37,7 @@ class SvgIconsParser @Autowired constructor(
                 return FileVisitResult.CONTINUE
             }
 
-            override fun postVisitDirectory(dir: Path, exc: IOException): FileVisitResult {
+            override fun postVisitDirectory(dir: Path, exc: IOException?): FileVisitResult {
                 return FileVisitResult.TERMINATE
             }
         })
