@@ -20,10 +20,10 @@ class BaticSvgParser : SvgParser {
         val resultByteStream = ByteArrayOutputStream()
         val transcoderOutput = TranscoderOutput(resultByteStream)
 
-        val pngTranscoder = PNGTranscoder()
-        pngTranscoder.addTranscodingHint(SVGAbstractTranscoder.KEY_HEIGHT, 256f)
-        pngTranscoder.addTranscodingHint(SVGAbstractTranscoder.KEY_WIDTH, 256f)
-        pngTranscoder.transcode(transcoderInput, transcoderOutput)
+        val transcoder = PNGTranscoder()
+        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_HEIGHT, 64f)
+        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_WIDTH, 64f)
+        transcoder.transcode(transcoderInput, transcoderOutput)
 
         resultByteStream.flush()
         val bytes = resultByteStream.toByteArray()
