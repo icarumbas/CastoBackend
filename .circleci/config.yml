@@ -15,10 +15,6 @@ jobs:
       # git pull
       - checkout
 
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-
       # Download and cache dependencies
       - restore_cache:
          keys:
@@ -36,4 +32,28 @@ jobs:
       # store raw contents of src code
       - store_artifacts:
           path: target/classes
-          destination: sample-springboot-api
+          destination: casto
+  deploy:
+    docker:
+      # specify OS base to run the steps from
+      - image: alpine:3.12
+    steps:
+      - checkout
+      - run:
+          name: Deploy Application to Fly
+          command: |
+            chmod +x scripts/deploy.sh
+            ./scripts/deploy.sh
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            # the test job must pass, before starting the deploy job
+            - build
+          filters:
+            branches:
+              # deploy only on branch main
+              only: main
