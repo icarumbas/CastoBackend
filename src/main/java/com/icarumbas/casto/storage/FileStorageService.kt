@@ -51,7 +51,7 @@ class FileStorageService {
     }
 
     fun getPath(name: String, extension: String, folderPath: Path): Path {
-        return folderPath.resolve("$name.$extension")
+        return folderPath.resolve("$name$extension")
     }
 
     fun loadAsResource(name: String, extension: String, folderPath: Path): Resource {

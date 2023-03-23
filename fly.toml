@@ -6,7 +6,9 @@ kill_timeout = 5
 primary_region = "lhr"
 processes = []
 
-[env]
+[mounts]
+  source="casto_data"
+  destination="/out"
 
 [experimental]
   auto_rollback = true

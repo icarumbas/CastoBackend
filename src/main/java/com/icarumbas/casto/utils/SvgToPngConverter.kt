@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+private const val ICON_WIDTH = 64F
+private const val ICON_HEIGHT = 64F
 
 interface SvgParser {
     fun svgToPng(svg: File): ByteArray
@@ -21,8 +23,8 @@ class BaticSvgParser : SvgParser {
         val transcoderOutput = TranscoderOutput(resultByteStream)
 
         val transcoder = PNGTranscoder()
-        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_HEIGHT, 64f)
-        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_WIDTH, 64f)
+        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_HEIGHT, ICON_HEIGHT)
+        transcoder.addTranscodingHint(SVGAbstractTranscoder.KEY_WIDTH, ICON_WIDTH)
         transcoder.transcode(transcoderInput, transcoderOutput)
 
         resultByteStream.flush()

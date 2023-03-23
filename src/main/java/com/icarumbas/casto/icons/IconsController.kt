@@ -7,7 +7,6 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import java.nio.file.Files
 
 
@@ -18,8 +17,7 @@ class IconsController @Autowired constructor(
     private val svgParser: SvgParser,
 ) {
     @GetMapping(
-        "/{ticker}",
-        MediaType.IMAGE_PNG_VALUE
+        path = ["icon/{ticker}"]
     )
     fun getIcon(@PathVariable ticker: String): ResponseEntity<ByteArray> {
         val resource = pngIconsStorageService.getIconResource(ticker)
@@ -28,30 +26,36 @@ class IconsController @Autowired constructor(
             .body(resource.contentAsByteArray)
     }
 
-    @PostMapping("/save-icon")
+    @GetMapping("/path/{ticker}")
+    fun getIconServerPath(@PathVariable ticker: String): ResponseEntity<String> {
+        val path = pngIconsStorageService.getIconPath(ticker)
+        return ResponseEntity.ok()
+            .body(path.toString())
+    }
+
+    @PostMapping(
+        path = ["/save-icon"],
+        consumes = [MediaType.MULTIPART_FORM_DATA_VALUE]
+    )
     fun handleIconUpload(
-        @RequestParam("file") file: MultipartFile,
-        redirectAttributes: RedirectAttributes
+        @RequestParam files: List<MultipartFile>
     ): String {
-        val svgFilePath = svgIconsStorageService.storeIcon(file)
+        files.forEach { file ->
+            val svgFilePath = svgIconsStorageService.storeIcon(file)
 
-        if (svgFilePath != null) {
-            val ticker = file.nameWithoutExtension
-            val pngIconFile = pngIconsStorageService
-                .getIconPath(ticker.uppercase())
-                .toFile()
+            if (svgFilePath != null) {
+                val ticker = file.nameWithoutExtension
+                val pngIconFile = pngIconsStorageService
+                    .getIconPath(ticker.uppercase())
+                    .toFile()
 
-            if (!pngIconFile.exists()) {
-                pngIconFile.createNewFile()
-                val data = svgParser.svgToPng(svgFilePath.toFile())
-                Files.write(pngIconFile.toPath(), data)
+                if (!pngIconFile.exists()) {
+                    pngIconFile.createNewFile()
+                    val data = svgParser.svgToPng(svgFilePath.toFile())
+                    Files.write(pngIconFile.toPath(), data)
+                }
             }
         }
-
-        redirectAttributes.addFlashAttribute(
-            "message",
-            "You successfully uploaded " + file.originalFilename + "!"
-        )
-        return "redirect:/"
+        return "Files have been uploaded"
     }
 }

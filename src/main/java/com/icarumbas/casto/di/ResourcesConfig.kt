@@ -1,6 +1,5 @@
 package com.icarumbas.casto.di
 
-import jakarta.annotation.Resource
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.nio.file.Path

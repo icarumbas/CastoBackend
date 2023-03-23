@@ -9,5 +9,4 @@ public class CastoBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CastoBackendApplication.class, args);
 	}
-
 }
