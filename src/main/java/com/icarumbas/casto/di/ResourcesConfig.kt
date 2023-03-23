@@ -15,16 +15,16 @@ open class ResourcesConfig {
 
     @Bean(name = ["baseIconsPath"])
     open fun baseIconsPath(): Path {
-        return baseFilePath().resolve("/icons")
+        return baseFilePath().resolve("icons")
     }
 
     @Bean(name = ["svgIconsPath"])
     open fun svgIconsPath(): Path {
-        return baseIconsPath().resolve("/svg")
+        return baseIconsPath().resolve("svg")
     }
 
     @Bean(name = ["pngIconsPath"])
     open fun pngIconsPath(): Path {
-        return baseIconsPath().resolve("/png")
+        return baseIconsPath().resolve("png")
     }
 }

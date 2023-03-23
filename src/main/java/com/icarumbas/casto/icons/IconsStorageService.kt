@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.lang.IllegalArgumentException
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -29,7 +30,7 @@ class IconsStorageService(
         }
 
     private fun String.toIconExtension(): IconExtension? =
-        safeValueOf<IconExtension>(uppercase())
+        IconExtension.values().find { it.name == uppercase() }
 
     init {
         fileStorageService.createDirectories(pngIconsPath, svgIconsPath)
@@ -50,8 +51,8 @@ class IconsStorageService(
     }
 
     fun storeIcon(file: MultipartFile) {
-        val extension = file.extension.lowercase()
-        val iconExtension = safeValueOf<IconExtension>(extension.uppercase()) ?: return
+        val iconExtension = file.extension.toIconExtension() ?:
+            throw IllegalArgumentException("Unknown extension: ${file.extension}")
         val folderPath = iconExtension.folderPath()
         val path = fileStorageService.store(file, folderPath)
 
