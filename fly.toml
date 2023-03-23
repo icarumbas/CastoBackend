@@ -1,10 +1,13 @@
-# fly.toml file generated for casto on 2023-03-22T15:16:19+01:00
+# fly.toml file generated for casto on 2023-03-23T02:27:11+01:00
 
 app = "casto"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "lhr"
 processes = []
+
+[build]
+  image = "icarumbas/casto:latest"
 
 [env]
 

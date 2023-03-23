@@ -40,7 +40,6 @@ FROM eclipse-temurin:17-alpine
 ARG BUILD_HOME
 ENV APP_HOME=$BUILD_HOME
 COPY --from=build-image $APP_HOME/build/libs/casto-0.0.1-SNAPSHOT.jar app.jar
-COPY icons
 
 #
 # The command to run when the container starts.

@@ -1,7 +1,6 @@
 package com.icarumbas.casto.icons
 
 import com.icarumbas.casto.utils.SvgParser
-import com.icarumbas.casto.utils.extension
 import com.icarumbas.casto.utils.nameWithoutExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
-import java.io.File
 import java.nio.file.Files
 
 
@@ -36,7 +34,6 @@ class IconsController @Autowired constructor(
         redirectAttributes: RedirectAttributes
     ): String {
         val svgFilePath = svgIconsStorageService.storeIcon(file)
-
 
         if (svgFilePath != null) {
             val ticker = file.nameWithoutExtension
