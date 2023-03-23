@@ -54,7 +54,7 @@ class IconsStorageService(
         val iconExtension = file.extension.toIconExtension() ?:
             throw IllegalArgumentException("Unknown extension: ${file.extension}")
         val folderPath = iconExtension.folderPath()
-        val path = fileStorageService.store(file, folderPath)
+        val path = fileStorageService.store(file, folderPath, file.originalFilename.uppercase())
 
         if (iconExtension == IconExtension.SVG) {
             if (path != null) {

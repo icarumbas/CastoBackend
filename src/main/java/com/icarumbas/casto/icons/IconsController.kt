@@ -22,17 +22,8 @@ class IconsController @Autowired constructor(
 
         return ResponseEntity.ok()
             .contentType(MediaType.IMAGE_PNG)
+            .header("SERVER_PATH", resource.url.toString())
             .body(resource.contentAsByteArray)
-    }
-
-    @GetMapping("/path/{ticker}")
-    fun getIconServerPath(
-        @PathVariable ticker: String,
-        @RequestParam extension: String,
-    ): ResponseEntity<String> {
-        val path = iconsStorageService.getIconPath(ticker, extension)
-        return ResponseEntity.ok()
-            .body(path.toString())
     }
 
     @PostMapping(
