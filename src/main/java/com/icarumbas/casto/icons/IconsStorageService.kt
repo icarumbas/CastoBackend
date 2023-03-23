@@ -1,93 +1,35 @@
 package com.icarumbas.casto.icons
 
-import com.icarumbas.casto.storage.StorageException
-import com.icarumbas.casto.storage.StorageFileNotFoundException
-import org.springframework.beans.factory.annotation.Autowired
+import com.icarumbas.casto.storage.FileStorageService
 import org.springframework.core.io.Resource
-import org.springframework.core.io.UrlResource
-import org.springframework.stereotype.Service
-import org.springframework.util.FileSystemUtils
+import org.springframework.web.multipart.MultipartFile
 import java.io.File
-import java.io.IOException
-import java.net.MalformedURLException
-import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
-import java.util.stream.Stream
+import kotlin.io.path.nameWithoutExtension
 
 
-private const val ICONS_LOCATION = "/out/icons"
-private const val ICONS_EXTENSION = ".png"
+abstract class IconsStorageService(
+    private val fileStorageService: FileStorageService,
+    baseFilePath: Path,
+    folderName: String,
+    private val fileExtension: String,
+) {
 
-@Service
-class IconsStorageService @Autowired constructor() {
+    private val iconsFolder = baseFilePath.resolve(folderName)
 
-    private val rootPath = System.getProperty("user.dir")
-    private val iconsPath = Paths.get(rootPath, ICONS_LOCATION)
-
-    init {
-        try {
-            Files.createDirectories(iconsPath)
-        } catch (e: IOException) {
-            throw StorageException("Could not initialize storage", e)
-        }
+    fun getIconResource(ticker: String): Resource {
+        return fileStorageService.loadAsResource(ticker, fileExtension, iconsFolder)
     }
 
-    fun store(file: File) {
-        try {
-            val destinationFile = iconsPath.resolve(
-                Paths.get(file.name)
-            ).normalize().toAbsolutePath()
-
-            if (destinationFile.parent != iconsPath.toAbsolutePath()) {
-                // This is a security check
-                throw StorageException(
-                    "Cannot store file outside current directory."
-                )
-            }
-            file.inputStream().use { inputStream ->
-                Files.copy(
-                    inputStream, destinationFile,
-                    StandardCopyOption.REPLACE_EXISTING
-                )
-            }
-        } catch (e: IOException) {
-            throw StorageException("Failed to store file.", e)
-        }
+    fun getIconPath(ticker: String): Path {
+        return fileStorageService.getPath(ticker, fileExtension, iconsFolder)
     }
 
-    fun loadAll(): Stream<Path> {
-        return try {
-            Files.walk(iconsPath, 1)
-                .filter { path: Path -> path != iconsPath }
-                .map { other: Path? -> iconsPath.relativize(other) }
-        } catch (e: IOException) {
-            throw StorageException("Failed to read stored files", e)
-        }
+    fun storeIcon(file: MultipartFile): Path? {
+        return fileStorageService.store(file, iconsFolder)
     }
 
-    fun getPath(ticker: String): Path {
-        return iconsPath.resolve("$ticker.$ICONS_EXTENSION")
-    }
-
-    fun loadAsResource(ticker: String): Resource {
-        return try {
-            val file = getPath(ticker)
-            val resource: Resource = UrlResource(file.toUri())
-            if (resource.exists() || resource.isReadable) {
-                resource
-            } else {
-                throw StorageFileNotFoundException(
-                    "Could not read file: $ticker"
-                )
-            }
-        } catch (e: MalformedURLException) {
-            throw StorageFileNotFoundException("Could not read file: $ticker", e)
-        }
-    }
-
-    fun deleteAll() {
-        FileSystemUtils.deleteRecursively(iconsPath.toFile())
+    fun storeIcon(file: File) {
+        fileStorageService.store(file, iconsFolder)
     }
 }
