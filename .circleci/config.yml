@@ -3,7 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:17-jdk
-
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
     working_directory: ~/casto
 
     environment:
@@ -37,6 +39,9 @@ jobs:
     docker:
       # specify OS base to run the steps from
       - image: alpine:3.12
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASS
     steps:
       - checkout
       - run:
