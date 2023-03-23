@@ -12,4 +12,19 @@ open class ResourcesConfig {
     open fun baseFilePath(): Path {
         return Paths.get(System.getProperty("user.dir"), "/out")
     }
+
+    @Bean(name = ["baseIconsPath"])
+    open fun baseIconsPath(): Path {
+        return baseFilePath().resolve("/icons")
+    }
+
+    @Bean(name = ["svgIconsPath"])
+    open fun svgIconsPath(): Path {
+        return baseIconsPath().resolve("/svg")
+    }
+
+    @Bean(name = ["pngIconsPath"])
+    open fun pngIconsPath(): Path {
+        return baseIconsPath().resolve("/png")
+    }
 }

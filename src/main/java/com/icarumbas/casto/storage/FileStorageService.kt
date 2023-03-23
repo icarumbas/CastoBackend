@@ -72,11 +72,13 @@ class FileStorageService {
         FileSystemUtils.deleteRecursively(folderPath.toFile())
     }
 
-    fun createDirectories(folderPath: Path) {
-        try {
-            Files.createDirectories(folderPath)
-        } catch (e: IOException) {
-            throw StorageException("Could not create directories for path: $folderPath", e)
+    fun createDirectories(vararg folderPaths: Path) {
+        folderPaths.forEach { path ->
+            try {
+                Files.createDirectories(path)
+            } catch (e: IOException) {
+                throw StorageException("Could not create directories for path: $path", e)
+            }
         }
     }
 }

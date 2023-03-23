@@ -13,3 +13,7 @@ val MultipartFile.extension: String
  */
 public val MultipartFile.nameWithoutExtension: String
     get() = originalFilename.substringBeforeLast(".")
+
+inline fun <reified T : Enum<T>> safeValueOf(type: String): T? {
+    return java.lang.Enum.valueOf(T::class.java, type)
+}
