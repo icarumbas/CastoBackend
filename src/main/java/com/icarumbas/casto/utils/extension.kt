@@ -7,3 +7,9 @@ import org.springframework.web.multipart.MultipartFile
  */
 val MultipartFile.extension: String
     get() = name.substringAfterLast('.', "")
+
+/**
+ * Returns file's name without an extension.
+ */
+public val MultipartFile.nameWithoutExtension: String
+    get() = originalFilename.substringBeforeLast(".")

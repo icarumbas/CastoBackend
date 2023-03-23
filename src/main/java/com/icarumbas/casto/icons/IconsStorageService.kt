@@ -17,6 +17,10 @@ abstract class IconsStorageService(
 
     private val iconsFolder = baseFilePath.resolve(folderName)
 
+    init {
+        fileStorageService.createDirectories(iconsFolder)
+    }
+
     fun getIconResource(ticker: String): Resource {
         return fileStorageService.loadAsResource(ticker, fileExtension, iconsFolder)
     }

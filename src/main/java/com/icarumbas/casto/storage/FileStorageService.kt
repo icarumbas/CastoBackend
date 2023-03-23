@@ -23,7 +23,7 @@ class FileStorageService {
     }
 
     fun store(file: MultipartFile, folderPath: Path): Path? {
-        return store(file.name, folderPath, file.inputStream)
+        return store(file.originalFilename, folderPath, file.inputStream)
     }
 
     private fun store(fileName: String, folderPath: Path, inputStream: InputStream): Path? {

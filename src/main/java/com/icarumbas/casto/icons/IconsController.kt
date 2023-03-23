@@ -2,6 +2,7 @@ package com.icarumbas.casto.icons
 
 import com.icarumbas.casto.utils.SvgParser
 import com.icarumbas.casto.utils.extension
+import com.icarumbas.casto.utils.nameWithoutExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -29,15 +30,16 @@ class IconsController @Autowired constructor(
             .body(resource.contentAsByteArray)
     }
 
-    @PostMapping("/")
+    @PostMapping("/save-icon")
     fun handleIconUpload(
         @RequestParam("file") file: MultipartFile,
         redirectAttributes: RedirectAttributes
     ): String {
         val svgFilePath = svgIconsStorageService.storeIcon(file)
 
+
         if (svgFilePath != null) {
-            val ticker = file.extension
+            val ticker = file.nameWithoutExtension
             val pngIconFile = pngIconsStorageService
                 .getIconPath(ticker.uppercase())
                 .toFile()
