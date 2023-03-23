@@ -34,6 +34,9 @@ jobs:
       # run tests!
       - run: gradle test
   deploy:
+    docker:
+      # specify OS base to run the steps from
+      - image: alpine:3.12
     steps:
       - checkout
       - run:
