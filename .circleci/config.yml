@@ -33,7 +33,7 @@ jobs:
 
       # run tests!
       - run: gradle test
-  deployFly:
+  deploy:
     steps:
       - checkout
       - run:
@@ -45,12 +45,16 @@ workflows:
   version: 2
   test-and-deploy:
     jobs:
-      - test
-      - deployFly:
+      - test:
+          filters:
+            branches:
+              # test only on branch master
+              only: master
+      - deploy:
           requires:
             # the test job must pass, before starting the deploy job
             - test
           filters:
             branches:
-              # deploy only on branch main
-              only: main
+              # deploy only on branch master
+              only: master
