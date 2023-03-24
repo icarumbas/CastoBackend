@@ -17,7 +17,6 @@ class IconsStorageService(
     private val fileStorageService: LocalFileStorageService,
     @Qualifier("pngIconsPath") private val pngIconsPath: Path,
     @Qualifier("svgIconsPath") private val svgIconsPath: Path,
-    @Qualifier("baseIconsPath") private val baseIconsPath: Path,
     private val svgParser: SvgParser,
 ) {
     enum class IconExtension(val value: String) {
