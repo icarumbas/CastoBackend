@@ -11,5 +11,8 @@ val MultipartFile.extension: String
 /**
  * Returns file's name without an extension.
  */
-public val MultipartFile.nameWithoutExtension: String
+val MultipartFile.nameWithoutExtension: String
     get() = originalFilename.substringBeforeLast(".")
+
+val String.beforeFirstDot: String
+    get() = substringBefore(".")

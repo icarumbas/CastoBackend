@@ -19,12 +19,12 @@ import java.util.stream.Stream
 @Service
 class LocalFileStorageService : FileStorageService {
 
-    override fun store(file: File, folderPath: Path): Path? {
-        return store(file.name, folderPath, file.inputStream())
+    override fun store(file: File, folderPath: Path) {
+        return store(folderPath, file.inputStream())
     }
 
-    override fun store(file: MultipartFile, folderPath: Path, name: String): Path? {
-        return store(name, folderPath, file.inputStream)
+    override fun store(file: MultipartFile, folderPath: Path) {
+        return store(folderPath, file.inputStream)
     }
 
     override fun getPath(name: String, extension: String, folderPath: Path): Path {
@@ -69,25 +69,14 @@ class LocalFileStorageService : FileStorageService {
         }
     }
 
-    private fun store(fileName: String, folderPath: Path, inputStream: InputStream): Path? {
+    private fun store(folderPath: Path, inputStream: InputStream) {
         try {
-            val destinationFile = folderPath.resolve(
-                Paths.get(fileName).normalize()
-            ).normalize().toAbsolutePath()
-
-            if (destinationFile.parent != folderPath.toAbsolutePath()) {
-                // This is a security check
-                throw StorageException(
-                    "Cannot store file outside current directory."
-                )
-            }
             inputStream.use {
                 Files.copy(
-                    it, destinationFile,
+                    it, folderPath,
                     StandardCopyOption.REPLACE_EXISTING
                 )
             }
-            return destinationFile
         } catch (e: IOException) {
             throw StorageException("Failed to store file.", e)
         }

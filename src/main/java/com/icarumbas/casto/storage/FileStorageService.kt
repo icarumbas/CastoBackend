@@ -8,9 +8,9 @@ import java.util.stream.Stream
 
 interface FileStorageService {
 
-    fun store(file: File, folderPath: Path): Path?
+    fun store(file: File, folderPath: Path)
 
-    fun store(file: MultipartFile, folderPath: Path, name: String = file.originalFilename): Path?
+    fun store(file: MultipartFile, folderPath: Path)
 
     fun getPath(name: String, extension: String, folderPath: Path): Path
 

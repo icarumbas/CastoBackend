@@ -17,9 +17,9 @@ class IconsController @Autowired constructor(
     @GetMapping(path = ["icon/{ticker}"])
     fun getIcon(
         @PathVariable ticker: String,
-        @RequestParam extension: String,
+        @RequestParam(required = false) extension: String?,
     ): ResponseEntity<ByteArray> {
-        val resource = iconsStorageService.getIconResource(ticker, extension)
+        val resource = iconsStorageService.getIconResource(ticker, extension ?: "png")
 
         return ResponseEntity.ok()
             .contentType(MediaType.IMAGE_PNG)

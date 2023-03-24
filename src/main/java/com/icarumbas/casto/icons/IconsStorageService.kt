@@ -42,7 +42,7 @@ class IconsStorageService(
         val iconExtension = extension.toIconExtension() ?:
             throw StorageFileNotFoundException("Unknown extension: $extension")
         val folderPath = iconExtension.folderPath()
-        return fileStorageService.loadAsResource(ticker, iconExtension.value, folderPath)
+        return fileStorageService.loadAsResource(ticker.uppercase(), iconExtension.value, folderPath)
     }
 
     fun getIconPath(ticker: String, extension: String): Path {
@@ -68,12 +68,13 @@ class IconsStorageService(
     fun storeIcon(file: MultipartFile) {
         val iconExtension = file.extension.toIconExtension() ?:
             throw IllegalArgumentException("Unknown extension: ${file.extension}")
-        val folderPath = iconExtension.folderPath()
-        val path = fileStorageService.store(file, folderPath, file.originalFilename.uppercase())
+        val ticker = file.nameWithoutExtension.beforeFirstDot
+        val filePath = fileStorageService
+            .getPath(ticker.uppercase(), iconExtension.value, iconExtension.folderPath())
+        fileStorageService.store(file, filePath)
 
         if (iconExtension == IconExtension.SVG) {
-            if (path != null) {
-                val ticker = file.nameWithoutExtension
+            if (filePath.toFile().exists()) {
                 val pngParams = IconExtension.PNG
                 val pngIconFile = fileStorageService
                     .getPath(ticker.uppercase(), pngParams.value, pngParams.folderPath())
@@ -81,7 +82,7 @@ class IconsStorageService(
 
                 if (!pngIconFile.exists()) {
                     pngIconFile.createNewFile()
-                    val data = svgParser.svgToPng(path.toFile())
+                    val data = svgParser.svgToPng(filePath.toFile())
                     Files.write(pngIconFile.toPath(), data)
                 }
             }
