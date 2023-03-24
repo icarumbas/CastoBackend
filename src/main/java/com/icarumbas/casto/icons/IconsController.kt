@@ -1,19 +1,20 @@
 package com.icarumbas.casto.icons
 
+import com.icarumbas.casto.storage.StorageFileNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import java.nio.file.Path
+import java.util.stream.Collectors
 
 
 @RestController
 class IconsController @Autowired constructor(
     private val iconsStorageService: IconsStorageService,
 ) {
-    @GetMapping(
-        path = ["icon/{ticker}"]
-    )
+    @GetMapping(path = ["icon/{ticker}"])
     fun getIcon(
         @PathVariable ticker: String,
         @RequestParam extension: String,
@@ -37,5 +38,20 @@ class IconsController @Autowired constructor(
             iconsStorageService.storeIcon(file)
         }
         return "Files have been uploaded"
+    }
+
+    @GetMapping("/list-icons")
+    fun listUploadedFiles(
+        @RequestParam(required = false) extension: String?,
+    ): ResponseEntity<List<String>> {
+        val list = iconsStorageService.listFiles(extension)
+            .map(Path::toString)
+            .collect(Collectors.toList())
+        return ResponseEntity.ok(list)
+    }
+
+    @ExceptionHandler(StorageFileNotFoundException::class)
+    fun handleStorageFileNotFound(exc: StorageFileNotFoundException): ResponseEntity<*>? {
+        return ResponseEntity.notFound().build<Any>()
     }
 }
