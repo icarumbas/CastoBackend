@@ -11,10 +11,11 @@ import java.util.stream.Collectors
 
 
 @RestController
+@RequestMapping("/icons")
 class IconsController @Autowired constructor(
     private val iconsStorageService: IconsStorageService,
 ) {
-    @GetMapping(path = ["icon/{ticker}"])
+    @GetMapping(path = ["/{ticker}"])
     fun getIcon(
         @PathVariable ticker: String,
         @RequestParam(required = false) extension: String?,
@@ -27,8 +28,23 @@ class IconsController @Autowired constructor(
             .body(resource.contentAsByteArray)
     }
 
+    @PostMapping(path = ["/remove/{ticker}"])
+    fun removeIcon(
+        @PathVariable ticker: String,
+        @RequestParam(required = false) extension: String?,
+    ): ResponseEntity<String> {
+        iconsStorageService.removeIcon(ticker, extension)
+        return ResponseEntity.ok("Successfully removed icon $ticker")
+    }
+
+    @PostMapping(path = ["/remove-all"])
+    fun removeIcon(): ResponseEntity<String> {
+        iconsStorageService.removeAll()
+        return ResponseEntity.ok("Successfully removed all icons")
+    }
+
     @PostMapping(
-        path = ["/save-icon"],
+        path = ["/save"],
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE]
     )
     fun handleIconUpload(
@@ -40,7 +56,7 @@ class IconsController @Autowired constructor(
         return "Files have been uploaded"
     }
 
-    @GetMapping("/list-icons")
+    @GetMapping("/list")
     fun listUploadedFiles(
         @RequestParam(required = false) extension: String?,
     ): ResponseEntity<List<String>> {

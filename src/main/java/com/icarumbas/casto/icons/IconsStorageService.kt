@@ -79,15 +79,33 @@ class IconsStorageService(
                 val pngIconFile = fileStorageService
                     .getPath(ticker.uppercase(), pngParams.value, pngParams.folderPath())
                     .toFile()
-
-                if (!pngIconFile.exists()) {
-                    pngIconFile.createNewFile()
-                    val data = svgParser.svgToPng(filePath.toFile())
-                    Files.write(pngIconFile.toPath(), data)
-                }
+                pngIconFile.createNewFile()
+                val data = svgParser.svgToPng(filePath.toFile())
+                Files.write(pngIconFile.toPath(), data)
             }
         }
     }
 
+    fun removeIcon(ticker: String, extension: String?) {
+        fun remove(extension: IconExtension) {
+            val folderPath = extension.folderPath()
+            val path = fileStorageService.getPath(ticker.uppercase(), extension.value, folderPath)
+            fileStorageService.delete(path)
+        }
+
+        if (extension != null) {
+            val iconExtension = extension.toIconExtension()
+                ?: throw StorageFileNotFoundException("Unknown extension: $extension")
+            remove(iconExtension)
+        } else {
+            remove(IconExtension.SVG)
+            remove(IconExtension.PNG)
+        }
+    }
+
+    fun removeAll() {
+        fileStorageService.deleteContents(pngIconsPath)
+        fileStorageService.deleteContents(svgIconsPath)
+    }
 
 }

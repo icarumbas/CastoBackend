@@ -1,5 +1,6 @@
 package com.icarumbas.casto.storage
 
+import org.apache.commons.io.FileUtils
 import org.springframework.core.io.Resource
 import org.springframework.core.io.UrlResource
 import org.springframework.stereotype.Service
@@ -11,7 +12,6 @@ import java.io.InputStream
 import java.net.MalformedURLException
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.stream.Stream
 
@@ -45,8 +45,12 @@ class LocalFileStorageService : FileStorageService {
         }
     }
 
-    override fun deleteAll(folderPath: Path) {
-        FileSystemUtils.deleteRecursively(folderPath.toFile())
+    override fun delete(path: Path) {
+        FileSystemUtils.deleteRecursively(path)
+    }
+
+    override fun deleteContents(path: Path) {
+        FileUtils.cleanDirectory(path.toFile())
     }
 
     override fun createDirectories(vararg folderPaths: Path) {

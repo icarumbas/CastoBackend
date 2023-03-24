@@ -16,7 +16,9 @@ interface FileStorageService {
 
     fun loadAsResource(name: String, extension: String, folderPath: Path): Resource
 
-    fun deleteAll(folderPath: Path)
+    fun delete(path: Path)
+
+    fun deleteContents(path: Path)
 
     fun createDirectories(vararg folderPaths: Path)
 
