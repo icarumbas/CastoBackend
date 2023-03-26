@@ -1,4 +1,4 @@
-package com.icarumbas.casto.storage
+package com.icarumbas.casto.storage.files
 
 import org.springframework.core.io.Resource
 import org.springframework.web.multipart.MultipartFile

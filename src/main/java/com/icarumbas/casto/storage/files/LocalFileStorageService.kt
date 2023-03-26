@@ -1,4 +1,4 @@
-package com.icarumbas.casto.storage
+package com.icarumbas.casto.storage.files
 
 import org.apache.commons.io.FileUtils
 import org.springframework.core.io.Resource

@@ -1,7 +1,7 @@
 package com.icarumbas.casto.icons
 
-import com.icarumbas.casto.storage.LocalFileStorageService
-import com.icarumbas.casto.storage.StorageFileNotFoundException
+import com.icarumbas.casto.storage.files.LocalFileStorageService
+import com.icarumbas.casto.storage.files.StorageFileNotFoundException
 import com.icarumbas.casto.utils.*
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.io.Resource

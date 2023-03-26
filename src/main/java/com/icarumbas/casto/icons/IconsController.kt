@@ -1,6 +1,6 @@
 package com.icarumbas.casto.icons
 
-import com.icarumbas.casto.storage.StorageFileNotFoundException
+import com.icarumbas.casto.storage.files.StorageFileNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
