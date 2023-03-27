@@ -7,17 +7,14 @@ import org.springframework.http.client.ClientHttpRequestFactory
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory
 import org.springframework.web.client.RestTemplate
 
-private const val BASE_URL = "https://rest-sandbox.coinapi.io"
-private const val API_KEY_HEADER = "X-CoinAPI-Key"
-private const val COIN_API_KEY = "F62AD5D0-393B-4092-9AF1-30B77A75735A"
+private const val BASE_URL = "https://api.coingecko.com/api/v3"
 
 @Configuration
 open class ApiDependencies {
 
-    @Bean(name = ["coinApi"])
-    open fun coinApiRestTemplate(requestFactory: ClientHttpRequestFactory): RestTemplate {
+    @Bean(name = ["CoinGecko"])
+    open fun coinGeckoRestTemplate(requestFactory: ClientHttpRequestFactory): RestTemplate {
         return RestTemplateBuilder()
-            .defaultHeader(API_KEY_HEADER, COIN_API_KEY)
             .rootUri(BASE_URL)
             .requestFactory(OkHttp3ClientHttpRequestFactory::class.java)
             .build()
