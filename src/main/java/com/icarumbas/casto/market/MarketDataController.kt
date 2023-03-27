@@ -1,6 +1,6 @@
 package com.icarumbas.casto.market
 
-import com.icarumbas.casto.market.responses.MarketDataResponse
+import com.icarumbas.casto.market.models.domain.MarketDataResponse
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

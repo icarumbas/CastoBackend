@@ -1,4 +1,4 @@
-package com.icarumbas.casto.api.coins.models
+package com.icarumbas.casto.market.models.api
 
 import kotlinx.serialization.Serializable
 

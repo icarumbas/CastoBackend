@@ -1,13 +1,13 @@
-package com.icarumbas.casto.api.coins
+package com.icarumbas.casto.market.api.coins
 
-import com.icarumbas.casto.api.coins.models.CoinGeckoCoinResponse
+import com.icarumbas.casto.market.models.api.CoinGeckoCoinResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 
 @Component
-class CoinGeckoCoinsApi @Autowired constructor(
+class CoinGeckoCoinIdsApi @Autowired constructor(
     @Qualifier("CoinGecko")
     private val restTemplate: RestTemplate
 ) {

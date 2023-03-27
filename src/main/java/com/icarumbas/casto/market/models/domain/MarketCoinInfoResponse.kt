@@ -1,4 +1,4 @@
-package com.icarumbas.casto.market.responses
+package com.icarumbas.casto.market.models.domain
 
 import kotlinx.serialization.Serializable
 
