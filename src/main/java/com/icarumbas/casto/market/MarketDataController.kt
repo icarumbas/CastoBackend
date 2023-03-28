@@ -1,5 +1,6 @@
 package com.icarumbas.casto.market
 
+import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdResponse
 import com.icarumbas.casto.market.models.domain.MarketDataResponse
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -21,5 +22,12 @@ class MarketDataController(
         return ResponseEntity.ok()
             .contentType(MediaType.APPLICATION_JSON)
             .body(response)
+    }
+
+    @PostMapping(path = ["/load-ids"])
+    fun getBaseMarketData(): ResponseEntity<CoinGeckoCoinIdResponse> {
+        return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(marketDataService.getCoinIds())
     }
 }
