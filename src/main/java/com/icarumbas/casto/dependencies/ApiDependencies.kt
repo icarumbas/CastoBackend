@@ -13,7 +13,7 @@ private const val BASE_URL = "https://api.coingecko.com/api/v3"
 open class ApiDependencies {
 
     @Bean(name = ["CoinGecko"])
-    open fun coinGeckoRestTemplate(requestFactory: ClientHttpRequestFactory): RestTemplate {
+    open fun coinGeckoRestTemplate(): RestTemplate {
         return RestTemplateBuilder()
             .rootUri(BASE_URL)
             .requestFactory(OkHttp3ClientHttpRequestFactory::class.java)
