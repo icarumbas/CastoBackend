@@ -1,4 +1,4 @@
-package com.icarumbas.casto.di
+package com.icarumbas.casto.dependencies
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

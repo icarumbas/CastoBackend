@@ -13,7 +13,7 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("aud")
     val aud: Long,
     @SerialName("bch")
-    val bch: Int,
+    val bch: Long,
     @SerialName("bdt")
     val bdt: Long,
     @SerialName("bhd")
@@ -23,11 +23,11 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("bmd")
     val bmd: Long,
     @SerialName("bnb")
-    val bnb: Int,
+    val bnb: Long,
     @SerialName("brl")
     val brl: Long,
     @SerialName("btc")
-    val btc: Int,
+    val btc: Long,
     @SerialName("cad")
     val cad: Long,
     @SerialName("chf")
@@ -41,11 +41,11 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("dkk")
     val dkk: Long,
     @SerialName("dot")
-    val dot: Int,
+    val dot: Long,
     @SerialName("eos")
     val eos: Long,
     @SerialName("eth")
-    val eth: Int,
+    val eth: Long,
     @SerialName("eur")
     val eur: Long,
     @SerialName("gbp")
@@ -67,11 +67,11 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("kwd")
     val kwd: Long,
     @SerialName("link")
-    val link: Int,
+    val link: Long,
     @SerialName("lkr")
     val lkr: Long,
     @SerialName("ltc")
-    val ltc: Int,
+    val ltc: Long,
     @SerialName("mmk")
     val mmk: Long,
     @SerialName("mxn")
@@ -111,13 +111,13 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("usd")
     val usd: Long,
     @SerialName("vef")
-    val vef: Int,
+    val vef: Long,
     @SerialName("vnd")
     val vnd: Long,
     @SerialName("xag")
-    val xag: Int,
+    val xag: Long,
     @SerialName("xau")
-    val xau: Int,
+    val xau: Long,
     @SerialName("xdr")
     val xdr: Long,
     @SerialName("xlm")
@@ -125,7 +125,7 @@ data class CoinGeckoMarketCapResponse(
     @SerialName("xrp")
     val xrp: Long,
     @SerialName("yfi")
-    val yfi: Int,
+    val yfi: Long,
     @SerialName("zar")
     val zar: Long
 )

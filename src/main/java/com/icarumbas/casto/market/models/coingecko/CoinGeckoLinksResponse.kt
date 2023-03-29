@@ -8,8 +8,6 @@ import kotlinx.serialization.Serializable
 data class CoinGeckoLinksResponse(
     @SerialName("announcement_url")
     val announcementUrl: List<String>,
-    @SerialName("bitcointalk_thread_identifier")
-    val bitcointalkThreadIdentifier: Int,
     @SerialName("blockchain_site")
     val blockchainSite: List<String>,
     @SerialName("chat_url")

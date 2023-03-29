@@ -3,6 +3,7 @@ package com.icarumbas.casto.market
 import com.icarumbas.casto.market.api.coins.CoinGeckoCoinIdsApi
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdResponse
+import com.icarumbas.casto.market.models.domain.MarketCoinInfoResponse
 import com.icarumbas.casto.market.models.domain.MarketDataResponse
 import com.icarumbas.casto.market.models.mappers.toCoinId
 import com.icarumbas.casto.market.repository.CoinIdsRepository
@@ -23,6 +24,17 @@ class MarketDataService @Autowired constructor(
     }
 
     fun getCoins(tickers: List<String>, currency: String? = "usd"): MarketDataResponse {
-        return MarketDataResponse(emptyList())
+        val marketCoinInfoResponseList = tickers.map { ticker ->
+            val coinId = coinIdsRepository.getByTickerIgnoreCase(ticker).coinGeckoId
+            val coinInfo = coinsApi.getCoinById(coinId)
+            MarketCoinInfoResponse(
+                ticker = ticker,
+                name = coinInfo.name,
+                price = coinInfo.marketData.currentPrice.usd,
+                priceChange = coinInfo.marketData.priceChangePercentage24hInCurrency.usd
+            )
+        }
+
+        return MarketDataResponse(marketCoinInfoResponseList)
     }
 }
