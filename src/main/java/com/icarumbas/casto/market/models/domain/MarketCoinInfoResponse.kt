@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 data class MarketCoinInfoResponse(
     val ticker: String,
     val name: String,
-    val price: Double,
-    val priceChange: Double
+    val price: Float,
+    val priceChange: Float
 )

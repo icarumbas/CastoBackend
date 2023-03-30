@@ -7,125 +7,125 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoinGeckoMarketCapResponse(
     @SerialName("aed")
-    val aed: Long,
+    val aed: Float,
     @SerialName("ars")
-    val ars: Long,
+    val ars: Float,
     @SerialName("aud")
-    val aud: Long,
+    val aud: Float,
     @SerialName("bch")
-    val bch: Long,
+    val bch: Float,
     @SerialName("bdt")
-    val bdt: Long,
+    val bdt: Float,
     @SerialName("bhd")
-    val bhd: Long,
+    val bhd: Float,
     @SerialName("bits")
-    val bits: Long,
+    val bits: Float,
     @SerialName("bmd")
-    val bmd: Long,
+    val bmd: Float,
     @SerialName("bnb")
-    val bnb: Long,
+    val bnb: Float,
     @SerialName("brl")
-    val brl: Long,
+    val brl: Float,
     @SerialName("btc")
-    val btc: Long,
+    val btc: Float,
     @SerialName("cad")
-    val cad: Long,
+    val cad: Float,
     @SerialName("chf")
-    val chf: Long,
+    val chf: Float,
     @SerialName("clp")
-    val clp: Long,
+    val clp: Float,
     @SerialName("cny")
-    val cny: Long,
+    val cny: Float,
     @SerialName("czk")
-    val czk: Long,
+    val czk: Float,
     @SerialName("dkk")
-    val dkk: Long,
+    val dkk: Float,
     @SerialName("dot")
-    val dot: Long,
+    val dot: Float,
     @SerialName("eos")
-    val eos: Long,
+    val eos: Float,
     @SerialName("eth")
-    val eth: Long,
+    val eth: Float,
     @SerialName("eur")
-    val eur: Long,
+    val eur: Float,
     @SerialName("gbp")
-    val gbp: Long,
+    val gbp: Float,
     @SerialName("hkd")
-    val hkd: Long,
+    val hkd: Float,
     @SerialName("huf")
-    val huf: Long,
+    val huf: Float,
     @SerialName("idr")
-    val idr: Long,
+    val idr: Float,
     @SerialName("ils")
-    val ils: Long,
+    val ils: Float,
     @SerialName("inr")
-    val inr: Long,
+    val inr: Float,
     @SerialName("jpy")
-    val jpy: Long,
+    val jpy: Float,
     @SerialName("krw")
-    val krw: Long,
+    val krw: Float,
     @SerialName("kwd")
-    val kwd: Long,
+    val kwd: Float,
     @SerialName("link")
-    val link: Long,
+    val link: Float,
     @SerialName("lkr")
-    val lkr: Long,
+    val lkr: Float,
     @SerialName("ltc")
-    val ltc: Long,
+    val ltc: Float,
     @SerialName("mmk")
-    val mmk: Long,
+    val mmk: Float,
     @SerialName("mxn")
-    val mxn: Long,
+    val mxn: Float,
     @SerialName("myr")
-    val myr: Long,
+    val myr: Float,
     @SerialName("ngn")
-    val ngn: Long,
+    val ngn: Float,
     @SerialName("nok")
-    val nok: Long,
+    val nok: Float,
     @SerialName("nzd")
-    val nzd: Long,
+    val nzd: Float,
     @SerialName("php")
-    val php: Long,
+    val php: Float,
     @SerialName("pkr")
-    val pkr: Long,
+    val pkr: Float,
     @SerialName("pln")
-    val pln: Long,
+    val pln: Float,
     @SerialName("rub")
-    val rub: Long,
+    val rub: Float,
     @SerialName("sar")
-    val sar: Long,
+    val sar: Float,
     @SerialName("sats")
-    val sats: Long,
+    val sats: Float,
     @SerialName("sek")
-    val sek: Long,
+    val sek: Float,
     @SerialName("sgd")
-    val sgd: Long,
+    val sgd: Float,
     @SerialName("thb")
-    val thb: Long,
+    val thb: Float,
     @SerialName("try")
-    val tryX: Long,
+    val tryX: Float,
     @SerialName("twd")
-    val twd: Long,
+    val twd: Float,
     @SerialName("uah")
-    val uah: Long,
+    val uah: Float,
     @SerialName("usd")
-    val usd: Long,
+    val usd: Float,
     @SerialName("vef")
-    val vef: Long,
+    val vef: Float,
     @SerialName("vnd")
-    val vnd: Long,
+    val vnd: Float,
     @SerialName("xag")
-    val xag: Long,
+    val xag: Float,
     @SerialName("xau")
-    val xau: Long,
+    val xau: Float,
     @SerialName("xdr")
-    val xdr: Long,
+    val xdr: Float,
     @SerialName("xlm")
-    val xlm: Long,
+    val xlm: Float,
     @SerialName("xrp")
-    val xrp: Long,
+    val xrp: Float,
     @SerialName("yfi")
-    val yfi: Long,
+    val yfi: Float,
     @SerialName("zar")
-    val zar: Long
+    val zar: Float
 )

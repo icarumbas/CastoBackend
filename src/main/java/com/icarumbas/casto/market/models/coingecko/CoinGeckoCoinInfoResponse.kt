@@ -9,27 +9,25 @@ data class CoinGeckoCoinInfoResponse(
     @SerialName("asset_platform_id")
     val assetPlatformId: String?,
     @SerialName("block_time_in_minutes")
-    val blockTimeInMinutes: Int,
+    val blockTimeInMinutes: Long?,
     @SerialName("categories")
     val categories: List<String>,
     @SerialName("coingecko_rank")
-    val coingeckoRank: Int,
+    val coingeckoRank: Long?,
     @SerialName("coingecko_score")
-    val coingeckoScore: Double,
+    val coingeckoScore: Float,
     @SerialName("community_score")
-    val communityScore: Double,
+    val communityScore: Float?,
     @SerialName("country_origin")
-    val countryOrigin: String,
+    val countryOrigin: String?,
     @SerialName("description")
-    val description: CoinGeckoDescriptionResponse,
-    @SerialName("detail_platforms")
-    val detailPlatforms: CoinGeckoDetailPlatformsResponse,
+    val description: CoinGeckoDescriptionResponse?,
     @SerialName("developer_score")
-    val developerScore: Double,
+    val developerScore: Float?,
     @SerialName("genesis_date")
-    val genesisDate: String,
+    val genesisDate: String?,
     @SerialName("hashing_algorithm")
-    val hashingAlgorithm: String,
+    val hashingAlgorithm: String?,
     @SerialName("id")
     val id: String,
     @SerialName("image")
@@ -39,23 +37,19 @@ data class CoinGeckoCoinInfoResponse(
     @SerialName("links")
     val links: CoinGeckoLinksResponse,
     @SerialName("liquidity_score")
-    val liquidityScore: Double,
+    val liquidityScore: Float?,
     @SerialName("market_cap_rank")
-    val marketCapRank: Int,
+    val marketCapRank: Long?,
     @SerialName("market_data")
     val marketData: CoinGeckoMarketDataResponse,
     @SerialName("name")
     val name: String,
-    @SerialName("platforms")
-    val platforms: CoinGeckoPlatformsResponse,
     @SerialName("public_interest_score")
-    val publicInterestScore: Double,
-    @SerialName("public_interest_stats")
-    val publicInterestStats: CoinGeckoPublicInterestStatsResponse,
+    val publicInterestScore: Float?,
     @SerialName("sentiment_votes_down_percentage")
-    val sentimentVotesDownPercentage: Double,
+    val sentimentVotesDownPercentage: Float?,
     @SerialName("sentiment_votes_up_percentage")
-    val sentimentVotesUpPercentage: Double,
+    val sentimentVotesUpPercentage: Float?,
     @SerialName("symbol")
     val symbol: String
 )

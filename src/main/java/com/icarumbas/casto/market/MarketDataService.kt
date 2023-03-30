@@ -30,8 +30,8 @@ class MarketDataService @Autowired constructor(
             MarketCoinInfoResponse(
                 ticker = ticker,
                 name = coinInfo.name,
-                price = coinInfo.marketData.currentPrice.usd,
-                priceChange = coinInfo.marketData.priceChangePercentage24hInCurrency.usd
+                price = coinInfo.marketData.currentPrice.usd!!,
+                priceChange = coinInfo.marketData.priceChangePercentage24hInCurrency.usd!!
             )
         }
 

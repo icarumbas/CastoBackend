@@ -7,125 +7,125 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoinGeckoAtlDateResponse(
     @SerialName("aed")
-    val aed: String,
+    val aed: String?,
     @SerialName("ars")
-    val ars: String,
+    val ars: String?,
     @SerialName("aud")
-    val aud: String,
+    val aud: String?,
     @SerialName("bch")
-    val bch: String,
+    val bch: String?,
     @SerialName("bdt")
-    val bdt: String,
+    val bdt: String?,
     @SerialName("bhd")
-    val bhd: String,
+    val bhd: String?,
     @SerialName("bits")
-    val bits: String,
+    val bits: String?,
     @SerialName("bmd")
-    val bmd: String,
+    val bmd: String?,
     @SerialName("bnb")
-    val bnb: String,
+    val bnb: String?,
     @SerialName("brl")
-    val brl: String,
+    val brl: String?,
     @SerialName("btc")
-    val btc: String,
+    val btc: String?,
     @SerialName("cad")
-    val cad: String,
+    val cad: String?,
     @SerialName("chf")
-    val chf: String,
+    val chf: String?,
     @SerialName("clp")
-    val clp: String,
+    val clp: String?,
     @SerialName("cny")
-    val cny: String,
+    val cny: String?,
     @SerialName("czk")
-    val czk: String,
+    val czk: String?,
     @SerialName("dkk")
-    val dkk: String,
+    val dkk: String?,
     @SerialName("dot")
-    val dot: String,
+    val dot: String?,
     @SerialName("eos")
-    val eos: String,
+    val eos: String?,
     @SerialName("eth")
-    val eth: String,
+    val eth: String?,
     @SerialName("eur")
-    val eur: String,
+    val eur: String?,
     @SerialName("gbp")
-    val gbp: String,
+    val gbp: String?,
     @SerialName("hkd")
-    val hkd: String,
+    val hkd: String?,
     @SerialName("huf")
-    val huf: String,
+    val huf: String?,
     @SerialName("idr")
-    val idr: String,
+    val idr: String?,
     @SerialName("ils")
-    val ils: String,
+    val ils: String?,
     @SerialName("inr")
-    val inr: String,
+    val inr: String?,
     @SerialName("jpy")
-    val jpy: String,
+    val jpy: String?,
     @SerialName("krw")
-    val krw: String,
+    val krw: String?,
     @SerialName("kwd")
-    val kwd: String,
+    val kwd: String?,
     @SerialName("link")
-    val link: String,
+    val link: String?,
     @SerialName("lkr")
-    val lkr: String,
+    val lkr: String?,
     @SerialName("ltc")
-    val ltc: String,
+    val ltc: String?,
     @SerialName("mmk")
-    val mmk: String,
+    val mmk: String?,
     @SerialName("mxn")
-    val mxn: String,
+    val mxn: String?,
     @SerialName("myr")
-    val myr: String,
+    val myr: String?,
     @SerialName("ngn")
-    val ngn: String,
+    val ngn: String?,
     @SerialName("nok")
-    val nok: String,
+    val nok: String?,
     @SerialName("nzd")
-    val nzd: String,
+    val nzd: String?,
     @SerialName("php")
-    val php: String,
+    val php: String?,
     @SerialName("pkr")
-    val pkr: String,
+    val pkr: String?,
     @SerialName("pln")
-    val pln: String,
+    val pln: String?,
     @SerialName("rub")
-    val rub: String,
+    val rub: String?,
     @SerialName("sar")
-    val sar: String,
+    val sar: String?,
     @SerialName("sats")
-    val sats: String,
+    val sats: String?,
     @SerialName("sek")
-    val sek: String,
+    val sek: String?,
     @SerialName("sgd")
-    val sgd: String,
+    val sgd: String?,
     @SerialName("thb")
-    val thb: String,
+    val thb: String?,
     @SerialName("try")
-    val tryX: String,
+    val tryX: String?,
     @SerialName("twd")
-    val twd: String,
+    val twd: String?,
     @SerialName("uah")
-    val uah: String,
+    val uah: String?,
     @SerialName("usd")
-    val usd: String,
+    val usd: String?,
     @SerialName("vef")
-    val vef: String,
+    val vef: String?,
     @SerialName("vnd")
-    val vnd: String,
+    val vnd: String?,
     @SerialName("xag")
-    val xag: String,
+    val xag: String?,
     @SerialName("xau")
-    val xau: String,
+    val xau: String?,
     @SerialName("xdr")
-    val xdr: String,
+    val xdr: String?,
     @SerialName("xlm")
-    val xlm: String,
+    val xlm: String?,
     @SerialName("xrp")
-    val xrp: String,
+    val xrp: String?,
     @SerialName("yfi")
-    val yfi: String,
+    val yfi: String?,
     @SerialName("zar")
-    val zar: String
+    val zar: String?
 )

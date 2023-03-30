@@ -13,17 +13,17 @@ data class CoinGeckoLinksResponse(
     @SerialName("chat_url")
     val chatUrl: List<String>,
     @SerialName("facebook_username")
-    val facebookUsername: String,
+    val facebookUsername: String?,
     @SerialName("homepage")
     val homepage: List<String>,
     @SerialName("official_forum_url")
     val officialForumUrl: List<String>,
     @SerialName("repos_url")
-    val reposUrl: CoinGeckoReposUrlResponse,
+    val reposUrl: CoinGeckoReposUrlResponse?,
     @SerialName("subreddit_url")
-    val subredditUrl: String,
+    val subredditUrl: String?,
     @SerialName("telegram_channel_identifier")
-    val telegramChannelIdentifier: String,
+    val telegramChannelIdentifier: String?,
     @SerialName("twitter_screen_name")
-    val twitterScreenName: String
+    val twitterScreenName: String?
 )
