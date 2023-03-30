@@ -7,125 +7,125 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CoinGeckoMarketCapChangeInCurrencyResponse(
     @SerialName("aed")
-    val aed: Float?,
+    val aed: Float,
     @SerialName("ars")
-    val ars: Float?,
+    val ars: Float,
     @SerialName("aud")
-    val aud: Float?,
+    val aud: Float,
     @SerialName("bch")
-    val bch: Float?,
+    val bch: Float,
     @SerialName("bdt")
-    val bdt: Float?,
+    val bdt: Float,
     @SerialName("bhd")
-    val bhd: Float?,
+    val bhd: Float,
     @SerialName("bits")
-    val bits: Float?,
+    val bits: Float,
     @SerialName("bmd")
-    val bmd: Float?,
+    val bmd: Float,
     @SerialName("bnb")
-    val bnb: Float?,
+    val bnb: Float,
     @SerialName("brl")
-    val brl: Float?,
+    val brl: Float,
     @SerialName("btc")
-    val btc: Float?,
+    val btc: Float,
     @SerialName("cad")
-    val cad: Float?,
+    val cad: Float,
     @SerialName("chf")
-    val chf: Float?,
+    val chf: Float,
     @SerialName("clp")
-    val clp: Float?,
+    val clp: Float,
     @SerialName("cny")
-    val cny: Float?,
+    val cny: Float,
     @SerialName("czk")
-    val czk: Float?,
+    val czk: Float,
     @SerialName("dkk")
-    val dkk: Float?,
+    val dkk: Float,
     @SerialName("dot")
-    val dot: Float?,
+    val dot: Float,
     @SerialName("eos")
-    val eos: Float?,
+    val eos: Float,
     @SerialName("eth")
-    val eth: Float?,
+    val eth: Float,
     @SerialName("eur")
-    val eur: Float?,
+    val eur: Float,
     @SerialName("gbp")
-    val gbp: Float?,
+    val gbp: Float,
     @SerialName("hkd")
-    val hkd: Float?,
+    val hkd: Float,
     @SerialName("huf")
-    val huf: Float?,
+    val huf: Float,
     @SerialName("idr")
-    val idr: Float?,
+    val idr: Float,
     @SerialName("ils")
-    val ils: Float?,
+    val ils: Float,
     @SerialName("inr")
-    val inr: Float?,
+    val inr: Float,
     @SerialName("jpy")
-    val jpy: Float?,
+    val jpy: Float,
     @SerialName("krw")
-    val krw: Float?,
+    val krw: Float,
     @SerialName("kwd")
-    val kwd: Float?,
+    val kwd: Float,
     @SerialName("link")
-    val link: Float?,
+    val link: Float,
     @SerialName("lkr")
-    val lkr: Float?,
+    val lkr: Float,
     @SerialName("ltc")
-    val ltc: Float?,
+    val ltc: Float,
     @SerialName("mmk")
-    val mmk: Float?,
+    val mmk: Float,
     @SerialName("mxn")
-    val mxn: Float?,
+    val mxn: Float,
     @SerialName("myr")
-    val myr: Float?,
+    val myr: Float,
     @SerialName("ngn")
-    val ngn: Float?,
+    val ngn: Float,
     @SerialName("nok")
-    val nok: Float?,
+    val nok: Float,
     @SerialName("nzd")
-    val nzd: Float?,
+    val nzd: Float,
     @SerialName("php")
-    val php: Float?,
+    val php: Float,
     @SerialName("pkr")
-    val pkr: Float?,
+    val pkr: Float,
     @SerialName("pln")
-    val pln: Float?,
+    val pln: Float,
     @SerialName("rub")
-    val rub: Float?,
+    val rub: Float,
     @SerialName("sar")
-    val sar: Float?,
+    val sar: Float,
     @SerialName("sats")
-    val sats: Float?,
+    val sats: Float,
     @SerialName("sek")
-    val sek: Float?,
+    val sek: Float,
     @SerialName("sgd")
-    val sgd: Float?,
+    val sgd: Float,
     @SerialName("thb")
-    val thb: Float?,
+    val thb: Float,
     @SerialName("try")
-    val tryX: Float?,
+    val tryX: Float,
     @SerialName("twd")
-    val twd: Float?,
+    val twd: Float,
     @SerialName("uah")
-    val uah: Float?,
+    val uah: Float,
     @SerialName("usd")
-    val usd: Float?,
+    val usd: Float,
     @SerialName("vef")
-    val vef: Float?,
+    val vef: Float,
     @SerialName("vnd")
-    val vnd: Float?,
+    val vnd: Float,
     @SerialName("xag")
-    val xag: Float?,
+    val xag: Float,
     @SerialName("xau")
-    val xau: Float?,
+    val xau: Float,
     @SerialName("xdr")
-    val xdr: Float?,
+    val xdr: Float,
     @SerialName("xlm")
-    val xlm: Float?,
+    val xlm: Float,
     @SerialName("xrp")
-    val xrp: Float?,
+    val xrp: Float,
     @SerialName("yfi")
-    val yfi: Float?,
+    val yfi: Float,
     @SerialName("zar")
-    val zar: Float?
+    val zar: Float
 )

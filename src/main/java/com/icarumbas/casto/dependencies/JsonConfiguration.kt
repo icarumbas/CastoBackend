@@ -8,15 +8,16 @@ import org.springframework.http.converter.json.KotlinSerializationJsonHttpMessag
 @Configuration
 open class JsonConfiguration {
 
-    val json
-        get() = Json {
+    @Bean
+    open fun json(): Json {
+        return Json {
             ignoreUnknownKeys = true
             isLenient = true
         }
-
+    }
 
     @Bean
-    open fun kotlinSerializationMessageConverter(): KotlinSerializationJsonHttpMessageConverter {
+    open fun kotlinSerializationMessageConverter(json: Json): KotlinSerializationJsonHttpMessageConverter {
         return KotlinSerializationJsonHttpMessageConverter(json)
     }
 }

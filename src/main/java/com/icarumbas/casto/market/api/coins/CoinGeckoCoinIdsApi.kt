@@ -17,7 +17,7 @@ class CoinGeckoCoinIdsApi @Autowired constructor(
     /**
      * Use this to obtain all the coins' id in order to make API calls
      * */
-    fun getCoinsList(): CoinGeckoCoinIdResponse {
+    fun getCoinsList(): CoinGeckoCoinIdResponse? {
         val response = restTemplate.getForEntity("/coins/list", CoinGeckoCoinIdResponse::class.java)
         return response.body
     }
@@ -25,7 +25,7 @@ class CoinGeckoCoinIdsApi @Autowired constructor(
     /**
      * Get current data (name, price, market, ... including exchange tickers) for a coin.
      * */
-    fun getCoinById(id: String): CoinGeckoCoinInfoResponse {
+    fun getCoinById(id: String): CoinGeckoCoinInfoResponse? {
         val response = restTemplate.getForEntity("/coins/$id", CoinGeckoCoinInfoResponse::class.java)
         return response.body
     }
