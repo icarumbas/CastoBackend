@@ -43,37 +43,37 @@ data class CoinGeckoMarketDataResponse(
     @SerialName("price_change_24h")
     val priceChange24h: Float,
     @SerialName("price_change_24h_in_currency")
-    val priceChange24hInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChange24hInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_14d")
     val priceChangePercentage14d: Float,
     @SerialName("price_change_percentage_14d_in_currency")
-    val priceChangePercentage14dInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage14dInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_1h_in_currency")
-    val priceChangePercentage1hInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage1hInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_1y")
     val priceChangePercentage1y: Float,
     @SerialName("price_change_percentage_1y_in_currency")
-    val priceChangePercentage1yInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage1yInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_200d")
     val priceChangePercentage200d: Float,
     @SerialName("price_change_percentage_200d_in_currency")
-    val priceChangePercentage200dInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage200dInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_24h")
     val priceChangePercentage24h: Float,
     @SerialName("price_change_percentage_24h_in_currency")
-    val priceChangePercentage24hInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage24hInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_30d")
     val priceChangePercentage30d: Float,
     @SerialName("price_change_percentage_30d_in_currency")
-    val priceChangePercentage30dInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage30dInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_60d")
-    val priceChangePercentage60d: Double,
+    val priceChangePercentage60d: Float,
     @SerialName("price_change_percentage_60d_in_currency")
-    val priceChangePercentage60dInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage60dInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("price_change_percentage_7d")
     val priceChangePercentage7d: Float,
     @SerialName("price_change_percentage_7d_in_currency")
-    val priceChangePercentage7dInCurrency: CoinGeckoPriceChangePercentageInCurrencyResponse,
+    val priceChangePercentage7dInCurrency: CoinGeckoPriceInCurrencyResponse,
     @SerialName("total_volume")
     val totalVolume: CoinGeckoTotalVolumeResponse
 )

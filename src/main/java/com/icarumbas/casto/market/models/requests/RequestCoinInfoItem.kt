@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 data class RequestCoinInfoItem(
     val ticker: String,
     val name: String? = null,
+    val holdings: Float,
 )

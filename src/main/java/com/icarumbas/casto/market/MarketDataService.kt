@@ -2,9 +2,10 @@ package com.icarumbas.casto.market
 
 import com.icarumbas.casto.market.api.coins.CoinGeckoCoinIdsApi
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
-import com.icarumbas.casto.market.models.domain.MarketCoinInfoResponse
-import com.icarumbas.casto.market.models.domain.MarketDataResponse
+import com.icarumbas.casto.market.models.responses.MarketCoinInfoResponse
+import com.icarumbas.casto.market.models.responses.MarketDataResponse
 import com.icarumbas.casto.market.models.mappers.toCoinId
+import com.icarumbas.casto.market.models.mappers.toPriceChangeResponse
 import com.icarumbas.casto.market.models.requests.RequestCoinInfoItem
 import com.icarumbas.casto.market.repository.CoinIdsRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,27 +30,34 @@ class MarketDataService @Autowired constructor(
         }
     }
 
-    fun getCoins(coinInfoList: List<RequestCoinInfoItem>, currency: String? = "usd"): MarketDataResponse {
-        val marketCoinInfoResponseList = coinInfoList.mapNotNull { coinInfo ->
-            val ticker = coinInfo.ticker
-            val coinIds = coinIdsRepository.getByTickerIgnoreCase(ticker)
-            val coinId = when (coinIds.size) {
-                0 -> null
-                1 -> coinIds.first()
-                else -> {
-                    coinIds.find { it.name.equals(coinInfo.name, true) }
-                }
-            } ?: return@mapNotNull null
+    fun getCoins(coinInfoList: List<RequestCoinInfoItem>): MarketDataResponse {
+        val marketCoinInfoResponseList = coinInfoList.mapNotNull { requestCoinInfoItem ->
+            val coinId = findCoinIdForTicker(requestCoinInfoItem) ?: return@mapNotNull null
+            val responseCoinData = coinsApi.getCoinById(coinId) ?: return@mapNotNull null
+            val marketData = responseCoinData.marketData
+            val priceChangeTimedResponse = marketData.toPriceChangeResponse()
+            val price = marketData.currentPrice.usd
 
-            val coinInfo = coinsApi.getCoinById(coinId.id) ?: return@mapNotNull null
             MarketCoinInfoResponse(
-                ticker = ticker,
-                name = coinInfo.name,
-                price = coinInfo.marketData.currentPrice.usd,
-                priceChange = coinInfo.marketData.priceChangePercentage24hInCurrency.usd
+                ticker = requestCoinInfoItem.ticker,
+                name = requestCoinInfoItem.name.orEmpty(),
+                price = price,
+                holdingsPrice = requestCoinInfoItem.holdings * price,
+                priceChangePercent = priceChangeTimedResponse
             )
         }
 
         return MarketDataResponse(marketCoinInfoResponseList)
+    }
+
+    private fun findCoinIdForTicker(coinInfo: RequestCoinInfoItem): String? {
+        val coinIds = coinIdsRepository.getByTickerIgnoreCase(coinInfo.ticker)
+        return when (coinIds.size) {
+            0 -> null
+            1 -> coinIds.first().id
+            else -> {
+                coinIds.find { it.name.equals(coinInfo.name, true) }?.id
+            }
+        }
     }
 }

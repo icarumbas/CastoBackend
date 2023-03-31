@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoinGeckoPriceChangePercentageInCurrencyResponse(
+data class CoinGeckoPriceInCurrencyResponse(
     @SerialName("aed")
     val aed: Float,
     @SerialName("ars")

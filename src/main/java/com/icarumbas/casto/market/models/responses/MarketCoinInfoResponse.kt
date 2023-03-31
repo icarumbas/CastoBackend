@@ -1,4 +1,4 @@
-package com.icarumbas.casto.market.models.domain
+package com.icarumbas.casto.market.models.responses
 
 import kotlinx.serialization.Serializable
 
@@ -7,5 +7,6 @@ data class MarketCoinInfoResponse(
     val ticker: String,
     val name: String,
     val price: Float,
-    val priceChange: Float
+    val holdingsPrice: Float,
+    val priceChangePercent: MarketPriceChangeTimedResponse,
 )
