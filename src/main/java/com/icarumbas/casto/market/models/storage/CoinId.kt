@@ -12,4 +12,6 @@ data class CoinId(
     val id: String,
     @Column
     val ticker: String,
+    @Column
+    val name: String,
 )

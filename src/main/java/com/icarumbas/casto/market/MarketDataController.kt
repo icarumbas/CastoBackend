@@ -1,6 +1,7 @@
 package com.icarumbas.casto.market
 
 import com.icarumbas.casto.market.models.domain.MarketDataResponse
+import com.icarumbas.casto.market.models.requests.RequestCoinInfoData
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,22 +13,14 @@ class MarketDataController(
     private val marketDataService: MarketDataService
 ) {
 
-    @GetMapping(path = ["/coins-info"])
+    @PostMapping(path = ["/coins-info"])
     fun getBaseMarketData(
-        @RequestParam coins: List<String>,
-        @RequestParam(required = false) currency: String?
+        @RequestParam(required = false) currency: String?,
+        @RequestBody coins: RequestCoinInfoData,
     ): ResponseEntity<MarketDataResponse> {
-        val response = marketDataService.getCoins(coins, currency)
+        val response = marketDataService.getCoins(coins.data, currency)
         return ResponseEntity.ok()
             .contentType(MediaType.APPLICATION_JSON)
             .body(response)
-    }
-
-    @PostMapping(path = ["/load-ids"])
-    fun getBaseMarketData(): ResponseEntity<String> {
-        marketDataService.getCoinIds()
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body("OK")
     }
 }
