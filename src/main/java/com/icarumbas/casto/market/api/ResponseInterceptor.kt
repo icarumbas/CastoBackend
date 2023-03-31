@@ -19,8 +19,8 @@ class ResponseInterceptor : ClientHttpRequestInterceptor {
         execution: ClientHttpRequestExecution
     ): ClientHttpResponse {
         val response = execution.execute(request, body)
-        val responseStr = String(response.body.readAllBytes(), StandardCharsets.UTF_8)
-        logger.debug("Receive response: $responseStr")
+//        val responseStr = String(response.body.readAllBytes(), StandardCharsets.UTF_8)
+//        logger.debug("Receive response: $responseStr")
         return response
     }
 }

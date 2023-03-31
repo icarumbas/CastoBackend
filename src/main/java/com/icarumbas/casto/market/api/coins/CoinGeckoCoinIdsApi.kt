@@ -1,6 +1,6 @@
 package com.icarumbas.casto.market.api.coins
 
-import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdResponse
+import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinInfoResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -17,8 +17,9 @@ class CoinGeckoCoinIdsApi @Autowired constructor(
     /**
      * Use this to obtain all the coins' id in order to make API calls
      * */
-    fun getCoinsList(): CoinGeckoCoinIdResponse? {
-        val response = restTemplate.getForEntity("/coins/list", CoinGeckoCoinIdResponse::class.java)
+    fun getCoinsList(): Array<CoinGeckoCoinIdItemResponse>? {
+        val response = restTemplate.getForEntity("/coins/list",
+            Array<CoinGeckoCoinIdItemResponse>::class.java)
         return response.body
     }
 

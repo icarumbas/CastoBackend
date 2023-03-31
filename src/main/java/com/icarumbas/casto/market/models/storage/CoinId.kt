@@ -9,7 +9,7 @@ import jakarta.persistence.Table
 @Table(name = "coin_ids")
 data class CoinId(
     @Id
-    val ticker: String,
+    val id: String,
     @Column
-    val coinGeckoId: String
+    val ticker: String,
 )

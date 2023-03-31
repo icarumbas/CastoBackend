@@ -23,7 +23,6 @@ open class ApiDependencies {
             .rootUri(BASE_URL)
             .messageConverters(messageConverter)
             .requestFactory(OkHttp3ClientHttpRequestFactory::class.java)
-            .additionalInterceptors(responseInterceptor)
             .build()
     }
 }

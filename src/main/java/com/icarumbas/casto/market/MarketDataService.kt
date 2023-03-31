@@ -2,7 +2,6 @@ package com.icarumbas.casto.market
 
 import com.icarumbas.casto.market.api.coins.CoinGeckoCoinIdsApi
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
-import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdResponse
 import com.icarumbas.casto.market.models.domain.MarketCoinInfoResponse
 import com.icarumbas.casto.market.models.domain.MarketDataResponse
 import com.icarumbas.casto.market.models.mappers.toCoinId
@@ -16,17 +15,26 @@ class MarketDataService @Autowired constructor(
     private val coinIdsRepository: CoinIdsRepository,
 ) {
 
-    fun getCoinIds(): CoinGeckoCoinIdResponse? {
-        val allCoins = coinsApi.getCoinsList() ?: return null
+    fun getCoinIds() {
+        val allCoins = coinsApi.getCoinsList()!!
         val storageCoins = allCoins.map(CoinGeckoCoinIdItemResponse::toCoinId)
         coinIdsRepository.saveAll(storageCoins)
-        return allCoins
     }
 
     fun getCoins(tickers: List<String>, currency: String? = "usd"): MarketDataResponse {
         val marketCoinInfoResponseList = tickers.mapNotNull { ticker ->
-            val coinId = coinIdsRepository.getByTickerIgnoreCase(ticker).coinGeckoId
-            val coinInfo = coinsApi.getCoinById(coinId) ?: return@mapNotNull null
+            val coinIds = coinIdsRepository.getByTickerIgnoreCase(ticker)
+            val coinId = when (coinIds.size) {
+                0 -> null
+                1 -> coinIds.first()
+                else -> {
+                    coinIds.first {
+                        it.id.equals(ticker, true)
+                    }
+                }
+            } ?: return@mapNotNull null
+
+            val coinInfo = coinsApi.getCoinById(coinId.id) ?: return@mapNotNull null
             MarketCoinInfoResponse(
                 ticker = ticker,
                 name = coinInfo.name,
