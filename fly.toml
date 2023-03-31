@@ -7,7 +7,7 @@ primary_region = "lhr"
 processes = []
 
 [mounts]
-  source="casto_data"
+  source="app_cache"
   destination="/out"
 
 [experimental]
