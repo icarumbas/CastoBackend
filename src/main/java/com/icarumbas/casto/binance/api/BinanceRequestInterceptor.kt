@@ -1,4 +1,5 @@
-package com.icarumbas.casto.binance
+package com.icarumbas.casto.binance.api
+
 
 import com.icarumbas.casto.crypto.bytesToHexUTF8
 import com.icarumbas.casto.crypto.hmacSha256
@@ -34,11 +35,11 @@ class BinanceRequestInterceptor(
 
         val timestamp = System.currentTimeMillis()
 
-        val uriComponents = UriComponentsBuilder.fromHttpRequest(request)
+        val uriComponentsBuilder = UriComponentsBuilder.fromHttpRequest(request)
             .queryParam(TIMESTAMP_KEY, timestamp)
-            .build()
+        val tmpUriComponents = uriComponentsBuilder.build()
 
-        val message = uriComponents.queryParams.entries.joinToString(separator = "&") { entry ->
+        val message = tmpUriComponents.queryParams.entries.joinToString(separator = "&") { entry ->
             val name = entry.key
             val value = entry.value.first().toString()
             "$name=$value"
@@ -46,8 +47,11 @@ class BinanceRequestInterceptor(
         val hmac = hmacSha256(message, credentials.privateKey)
         val signature = bytesToHexUTF8(hmac)
 
-        uriComponents.queryParams.add(SIGNATURE_PARAMETER, signature)
-        val newUri = uriComponents.toUri()
+        val newUri = uriComponentsBuilder
+            .queryParam(SIGNATURE_PARAMETER, signature)
+            .encode()
+            .build()
+            .toUri()
 
         val modifiedRequest: HttpRequest = object : HttpRequestWrapper(request) {
             override fun getURI(): URI {

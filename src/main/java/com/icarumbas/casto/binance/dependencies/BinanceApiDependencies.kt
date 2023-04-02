@@ -1,6 +1,6 @@
 package com.icarumbas.casto.binance.dependencies
 
-import com.icarumbas.casto.binance.BinanceRequestInterceptor
+import com.icarumbas.casto.binance.api.BinanceRequestInterceptor
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean

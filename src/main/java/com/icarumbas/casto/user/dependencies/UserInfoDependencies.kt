@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.context.annotation.RequestScope
 
 @Configuration
-class UserInfoDependencies {
+open class UserInfoDependencies {
 
     @Bean
     @RequestScope
-    fun provideRequestUserInfoHandler(): RequestUserInfoHandler {
+    open fun provideRequestUserInfoHandler(): RequestUserInfoHandler {
         return RequestUserInfoHandler()
     }
 }

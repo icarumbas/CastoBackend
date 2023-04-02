@@ -3,7 +3,7 @@ package com.icarumbas.casto.user.dependencies
 import java.lang.IllegalStateException
 import java.util.*
 
-class RequestUserInfoHandler {
+open class RequestUserInfoHandler {
 
     private var _id: UUID? = null
 
