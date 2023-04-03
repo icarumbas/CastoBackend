@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CoinIdsRepository : JpaRepository<CoinId, String> {
 
-    fun getByTickerIgnoreCase(ticker: String): List<CoinId>
+    fun getByTickerIgnoreCase(ticker: String): CoinId?
 }

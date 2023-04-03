@@ -20,16 +20,6 @@ class MarketDataService @Autowired constructor(
     private val coinIdsRepository: CoinIdsRepository,
 ) {
 
-    @EventListener
-    fun preloadCoinIds(event: ApplicationReadyEvent) {
-        if (coinIdsRepository.count() == 0L) {
-            val allCoins = coinsApi.getCoinsList()
-                ?: throw IllegalStateException("Couldn't preload coin ids")
-            val storageCoins = allCoins.map(CoinGeckoCoinIdItemResponse::toCoinId)
-            coinIdsRepository.saveAll(storageCoins)
-        }
-    }
-
     fun getCoins(coinInfoList: List<RequestCoinInfoItem>): MarketDataResponse {
         val marketCoinInfoResponseList = coinInfoList.mapNotNull { requestCoinInfoItem ->
             val coinId = findCoinIdForTicker(requestCoinInfoItem) ?: return@mapNotNull null
@@ -52,12 +42,6 @@ class MarketDataService @Autowired constructor(
 
     private fun findCoinIdForTicker(coinInfo: RequestCoinInfoItem): String? {
         val coinIds = coinIdsRepository.getByTickerIgnoreCase(coinInfo.ticker)
-        return when (coinIds.size) {
-            0 -> null
-            1 -> coinIds.first().id
-            else -> {
-                coinIds.find { it.name.equals(coinInfo.name, true) }?.id
-            }
-        }
+        return coinIds?.id
     }
 }

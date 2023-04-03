@@ -49,7 +49,6 @@ class BinanceRequestInterceptor(
 
         val newUri = uriComponentsBuilder
             .queryParam(SIGNATURE_PARAMETER, signature)
-            .encode()
             .build()
             .toUri()
 

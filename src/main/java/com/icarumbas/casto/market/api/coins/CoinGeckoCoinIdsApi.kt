@@ -2,6 +2,7 @@ package com.icarumbas.casto.market.api.coins
 
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinInfoResponse
+import com.icarumbas.casto.market.models.coingecko.CoinGeckoSearchCoinResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Component
@@ -28,6 +29,15 @@ class CoinGeckoCoinIdsApi @Autowired constructor(
      * */
     fun getCoinById(id: String): CoinGeckoCoinInfoResponse? {
         val response = restTemplate.getForEntity("/coins/$id", CoinGeckoCoinInfoResponse::class.java)
+        return response.body
+    }
+
+    fun search(query: String): CoinGeckoSearchCoinResponse? {
+        val response = restTemplate.getForEntity(
+            "/search?query={query}",
+            CoinGeckoSearchCoinResponse::class.java,
+            query
+        )
         return response.body
     }
 }
