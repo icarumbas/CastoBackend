@@ -7,7 +7,7 @@ import jakarta.persistence.Table
 
 
 @Entity
-@Table(name = "coin-prices")
+@Table(name = "coin_prices")
 data class CoinPriceEntity(
     @Id
     val id: String,

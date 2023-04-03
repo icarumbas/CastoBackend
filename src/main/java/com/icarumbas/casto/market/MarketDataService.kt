@@ -38,14 +38,20 @@ class MarketDataService @Autowired constructor(
 
     fun getCoinPriceById(id: String): CoinPriceEntity? {
         return if (coinPricesRepository.existsById(id)) {
-            coinPricesRepository.getReferenceById(id).takeIf {
-                lastUpdateTimeValidator.isValid(it.lastUpdated)
+            val coinPrice = coinPricesRepository.getReferenceById(id)
+            if (lastUpdateTimeValidator.isValid(coinPrice.lastUpdated)) {
+                coinPrice
+            } else {
+                loadCoinPrice(id)
             }
         } else {
-            val responseCoinData = coinsApi.getCoinById(id) ?: return null
-            val coinPriceEntity = responseCoinData.marketData.toCoinPriceEntity(id)
-            coinPricesRepository.save(coinPriceEntity)
+            loadCoinPrice(id)
         }
+    }
 
+    private fun loadCoinPrice(id: String): CoinPriceEntity? {
+        val responseCoinData = coinsApi.getCoinById(id) ?: return null
+        val coinPriceEntity = responseCoinData.marketData.toCoinPriceEntity(id)
+        return coinPricesRepository.save(coinPriceEntity)
     }
 }
