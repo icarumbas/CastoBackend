@@ -1,7 +1,7 @@
 package com.icarumbas.casto.portfolio
 
-import com.icarumbas.casto.market.models.responses.MarketDataResponse
 import com.icarumbas.casto.portfolio.models.requests.BinanceCredentialsRequest
+import com.icarumbas.casto.portfolio.responses.PortfolioDataResponse
 import com.icarumbas.casto.user.dependencies.RequestUserInfoHandler
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -27,7 +27,7 @@ class PortfolioController(
     @PostMapping(path = ["/user-assets"])
     fun getBaseMarketData(
         @RequestParam id: String,
-    ): ResponseEntity<MarketDataResponse> {
+    ): ResponseEntity<PortfolioDataResponse> {
         userInfoHandler.setId(id)
         val response = portfolioService.getPortfolio()
         return ResponseEntity.ok()

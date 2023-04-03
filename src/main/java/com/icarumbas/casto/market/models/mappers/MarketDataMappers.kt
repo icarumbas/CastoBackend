@@ -1,16 +1,22 @@
 package com.icarumbas.casto.market.models.mappers
 
 import com.icarumbas.casto.market.models.coingecko.CoinGeckoMarketDataResponse
-import com.icarumbas.casto.market.models.responses.MarketPriceChangeTimedResponse
+import com.icarumbas.casto.market.models.storage.CoinPriceEntity
 
-fun CoinGeckoMarketDataResponse.toPriceChangeResponse(): MarketPriceChangeTimedResponse {
-    return MarketPriceChangeTimedResponse(
-        change1h = priceChangePercentage1hInCurrency.usd,
-        change24h = priceChangePercentage24h,
-        change7d = priceChangePercentage7d,
-        change14d = priceChangePercentage14d,
-        change30d = priceChangePercentage30d,
-        change60d = priceChangePercentage60d,
-        change1y = priceChangePercentage1y
+fun CoinGeckoMarketDataResponse.toCoinPriceEntity(
+    id: String,
+): CoinPriceEntity {
+
+    return CoinPriceEntity(
+        id = id,
+        price = currentPrice.usd,
+        lastUpdated = lastUpdated,
+        changePercent1h = priceChangePercentage1hInCurrency.usd,
+        changePercent24h = priceChangePercentage24hInCurrency.usd,
+        changePercent7d = priceChangePercentage7dInCurrency.usd,
+        changePercent14d = priceChangePercentage14dInCurrency.usd,
+        changePercent30d = priceChangePercentage30dInCurrency.usd,
+        changePercent60d = priceChangePercentage60dInCurrency.usd,
+        changePercent1y = priceChangePercentage1yInCurrency.usd,
     )
 }

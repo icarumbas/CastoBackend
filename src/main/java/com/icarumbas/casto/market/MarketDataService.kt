@@ -1,47 +1,51 @@
 package com.icarumbas.casto.market
 
 import com.icarumbas.casto.market.api.coins.CoinGeckoCoinIdsApi
-import com.icarumbas.casto.market.models.coingecko.CoinGeckoCoinIdItemResponse
-import com.icarumbas.casto.market.models.responses.MarketCoinInfoResponse
-import com.icarumbas.casto.market.models.responses.MarketDataResponse
 import com.icarumbas.casto.market.models.mappers.toCoinId
-import com.icarumbas.casto.market.models.mappers.toPriceChangeResponse
-import com.icarumbas.casto.market.models.requests.RequestCoinInfoItem
+import com.icarumbas.casto.market.models.mappers.toCoinPriceEntity
+import com.icarumbas.casto.market.models.storage.CoinIdEntity
+import com.icarumbas.casto.market.models.storage.CoinPriceEntity
 import com.icarumbas.casto.market.repository.CoinIdsRepository
+import com.icarumbas.casto.market.repository.CoinPricesRepository
+import com.icarumbas.casto.utils.LastUpdateTimeValidator
+import jakarta.persistence.EntityNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.event.ApplicationReadyEvent
-import org.springframework.context.event.EventListener
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.stereotype.Service
-import java.lang.IllegalStateException
 
 @Service
 class MarketDataService @Autowired constructor(
     private val coinsApi: CoinGeckoCoinIdsApi,
     private val coinIdsRepository: CoinIdsRepository,
+    private val coinPricesRepository: CoinPricesRepository,
+    private val lastUpdateTimeValidator: LastUpdateTimeValidator,
 ) {
 
-    fun getCoins(coinInfoList: List<RequestCoinInfoItem>): MarketDataResponse {
-        val marketCoinInfoResponseList = coinInfoList.mapNotNull { requestCoinInfoItem ->
-            val coinId = findCoinIdForTicker(requestCoinInfoItem) ?: return@mapNotNull null
-            val responseCoinData = coinsApi.getCoinById(coinId) ?: return@mapNotNull null
-            val marketData = responseCoinData.marketData
-            val priceChangeTimedResponse = marketData.toPriceChangeResponse()
-            val price = marketData.currentPrice.usd
-
-            MarketCoinInfoResponse(
-                ticker = requestCoinInfoItem.ticker,
-                name = requestCoinInfoItem.name.orEmpty(),
-                price = price,
-                holdingsPrice = requestCoinInfoItem.holdings * price,
-                priceChangePercent = priceChangeTimedResponse
-            )
+    fun getCoinMarketId(symbol: String): CoinIdEntity? {
+        return try {
+            coinIdsRepository.getByTickerIgnoreCase(symbol)
+        } catch (e: EmptyResultDataAccessException) {
+            val coin = coinsApi.search(symbol)?.coins?.firstOrNull() ?: return null
+            val localCoinIdData = coin.toCoinId()
+            coinIdsRepository.save(localCoinIdData)
         }
-
-        return MarketDataResponse(marketCoinInfoResponseList)
     }
 
-    private fun findCoinIdForTicker(coinInfo: RequestCoinInfoItem): String? {
-        val coinIds = coinIdsRepository.getByTickerIgnoreCase(coinInfo.ticker)
-        return coinIds?.id
+    fun getCoinPriceBySymbol(symbol: String): CoinPriceEntity? {
+        val coinGeckoCoinId = getCoinMarketId(symbol)?.id ?: return null
+        return getCoinPriceById(coinGeckoCoinId)
+    }
+
+    fun getCoinPriceById(id: String): CoinPriceEntity? {
+        return if (coinPricesRepository.existsById(id)) {
+            coinPricesRepository.getReferenceById(id).takeIf {
+                lastUpdateTimeValidator.isValid(it.lastUpdated)
+            }
+        } else {
+            val responseCoinData = coinsApi.getCoinById(id) ?: return null
+            val coinPriceEntity = responseCoinData.marketData.toCoinPriceEntity(id)
+            coinPricesRepository.save(coinPriceEntity)
+        }
+
     }
 }
