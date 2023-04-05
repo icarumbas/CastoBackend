@@ -3,7 +3,7 @@
 app = "casto"
 kill_signal = "SIGINT"
 kill_timeout = 5
-primary_region = "fra"
+primary_region = "cdg"
 processes = []
 
 [mounts]
