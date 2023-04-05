@@ -38,7 +38,7 @@ class PortfolioService(
                 ticker = asset.asset,
                 name = coinId.name,
                 price = coinPrice.price,
-                holdingsPrice = asset.free * coinPrice.price,
+                holdings = asset.free + asset.locked + asset.freeze,
                 priceChangePercent = coinPrice.toPortfolioCoinIPriceChangeResponse()
             )
         }

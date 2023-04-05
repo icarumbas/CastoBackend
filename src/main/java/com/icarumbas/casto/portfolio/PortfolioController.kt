@@ -24,8 +24,8 @@ class PortfolioController(
         return "Credentials saved"
     }
 
-    @PostMapping(path = ["/user-assets"])
-    fun getBaseMarketData(
+    @GetMapping(path = ["/holdings"])
+    fun getPortfolio(
         @RequestParam id: String,
     ): ResponseEntity<PortfolioDataResponse> {
         userInfoHandler.setId(id)
