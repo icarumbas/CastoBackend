@@ -24,6 +24,9 @@ dependencies {
 	implementation(fileTree("libs/") {
 		include("*.jar")
 	})
+	implementation project(':coingecko')
+	implementation project(':core')
+	implementation project(':binance')
 
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

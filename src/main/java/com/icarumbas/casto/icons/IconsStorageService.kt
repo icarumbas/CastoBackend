@@ -3,6 +3,9 @@ package com.icarumbas.casto.icons
 import com.icarumbas.casto.storage.files.LocalFileStorageService
 import com.icarumbas.casto.storage.files.StorageFileNotFoundException
 import com.icarumbas.casto.utils.*
+import com.icarumbas.core.utils.beforeFirstDot
+import com.icarumbas.core.utils.extension
+import com.icarumbas.core.utils.nameWithoutExtension
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
@@ -65,9 +68,11 @@ class IconsStorageService(
     }
 
     fun storeIcon(file: MultipartFile) {
-        val iconExtension = file.extension.toIconExtension() ?:
+        val iconExtension = file.extension?.toIconExtension() ?:
             throw IllegalArgumentException("Unknown extension: ${file.extension}")
-        val ticker = file.nameWithoutExtension.beforeFirstDot
+        val ticker = file.nameWithoutExtension?.beforeFirstDot ?:
+            throw IllegalArgumentException("Unknown symbol: ${file.originalFilename}")
+
         val filePath = fileStorageService
             .getPath(ticker.uppercase(), iconExtension.value, iconExtension.folderPath())
         fileStorageService.store(file, filePath)

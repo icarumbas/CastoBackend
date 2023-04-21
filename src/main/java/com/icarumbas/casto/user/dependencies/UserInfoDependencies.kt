@@ -1,5 +1,6 @@
 package com.icarumbas.casto.user.dependencies
 
+import com.icarumbas.core.RequestUserInfoHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.context.annotation.RequestScope
