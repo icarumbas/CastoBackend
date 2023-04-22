@@ -18,9 +18,9 @@ open class ApiDependencies {
         messageConverter: KotlinSerializationJsonHttpMessageConverter,
     ): RestTemplate {
         return RestTemplateBuilder()
-            .rootUri(BASE_URL)
             .messageConverters(messageConverter)
             .requestFactory(OkHttp3ClientHttpRequestFactory::class.java)
+            .rootUri(BASE_URL)
             .build()
     }
 }

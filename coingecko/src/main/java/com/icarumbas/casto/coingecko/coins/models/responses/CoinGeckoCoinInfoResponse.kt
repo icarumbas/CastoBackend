@@ -21,7 +21,7 @@ data class CoinGeckoCoinInfoResponse(
     @SerialName("country_origin")
     val countryOrigin: String?,
     @SerialName("description")
-    val description: com.icarumbas.coingecko.coins.models.responses.CoinGeckoDescriptionResponse?,
+    val description: CoinGeckoDescriptionResponse?,
     @SerialName("developer_score")
     val developerScore: Float?,
     @SerialName("genesis_date")
@@ -31,17 +31,17 @@ data class CoinGeckoCoinInfoResponse(
     @SerialName("id")
     val id: String,
     @SerialName("image")
-    val image: com.icarumbas.coingecko.coins.models.responses.CoinGeckoImageResponse,
+    val image: CoinGeckoImageResponse,
     @SerialName("last_updated")
     val lastUpdated: String,
     @SerialName("links")
-    val links: com.icarumbas.coingecko.coins.models.responses.CoinGeckoLinksResponse,
+    val links: CoinGeckoLinksResponse,
     @SerialName("liquidity_score")
     val liquidityScore: Float?,
     @SerialName("market_cap_rank")
     val marketCapRank: Long?,
     @SerialName("market_data")
-    val marketData: com.icarumbas.coingecko.coins.models.responses.CoinGeckoMarketDataResponse,
+    val marketData: CoinGeckoMarketDataResponse,
     @SerialName("name")
     val name: String,
     @SerialName("public_interest_score")

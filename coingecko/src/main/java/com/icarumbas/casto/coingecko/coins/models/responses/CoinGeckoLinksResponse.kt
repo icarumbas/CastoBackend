@@ -19,7 +19,7 @@ data class CoinGeckoLinksResponse(
     @SerialName("official_forum_url")
     val officialForumUrl: List<String>,
     @SerialName("repos_url")
-    val reposUrl: com.icarumbas.coingecko.coins.models.responses.CoinGeckoReposUrlResponse?,
+    val reposUrl: CoinGeckoReposUrlResponse?,
     @SerialName("subreddit_url")
     val subredditUrl: String?,
     @SerialName("telegram_channel_identifier")

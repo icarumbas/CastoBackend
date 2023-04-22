@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate
 
 
 @Component
-class ExchangesApi @Autowired constructor(
+class ExchangesApi(
     @Qualifier("CoinGecko")
     private val restTemplate: RestTemplate
 ) {

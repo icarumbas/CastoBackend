@@ -12,7 +12,7 @@ private const val BINANCE_SAPI_ENDPOINT = "sapi/v3"
 private const val BINANCE_API_ENDPOINT = "api/v3"
 
 @Component
-class BinanceApi @Autowired constructor(
+class BinanceApi(
     @Qualifier("binance")
     private val restTemplate: RestTemplate
 ) {
