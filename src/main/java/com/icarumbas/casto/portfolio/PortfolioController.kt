@@ -1,9 +1,9 @@
 package com.icarumbas.casto.portfolio
 
-import com.icarumbas.binance.service.BinanceService
+import com.icarumbas.casto.binance.service.BinanceService
 import com.icarumbas.casto.portfolio.models.requests.BinanceCredentialsRequest
 import com.icarumbas.casto.portfolio.models.responses.PortfolioDataResponse
-import com.icarumbas.core.RequestUserInfoHandler
+import com.icarumbas.casto.core.dependencies.RequestUserInfoHandler
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

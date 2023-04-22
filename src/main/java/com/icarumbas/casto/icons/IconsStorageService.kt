@@ -3,9 +3,9 @@ package com.icarumbas.casto.icons
 import com.icarumbas.casto.storage.files.LocalFileStorageService
 import com.icarumbas.casto.storage.files.StorageFileNotFoundException
 import com.icarumbas.casto.utils.*
-import com.icarumbas.core.utils.beforeFirstDot
-import com.icarumbas.core.utils.extension
-import com.icarumbas.core.utils.nameWithoutExtension
+import com.icarumbas.casto.core.utils.beforeFirstDot
+import com.icarumbas.casto.core.utils.extension
+import com.icarumbas.casto.core.utils.nameWithoutExtension
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
