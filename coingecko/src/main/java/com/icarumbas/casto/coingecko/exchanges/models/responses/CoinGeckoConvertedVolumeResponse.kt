@@ -11,5 +11,5 @@ data class CoinGeckoConvertedVolumeResponse(
     @SerialName("eth")
     val eth: Float,
     @SerialName("usd")
-    val usd: Long
+    val usd: Float
 )

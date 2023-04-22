@@ -1,22 +1,12 @@
 package com.icarumbas.casto.coingecko.exchanges.api
 
-
 import com.icarumbas.casto.coingecko.exchanges.models.responses.CoinGeckoExchangeTickersResponse
-import com.icarumbas.casto.coingecko.utils.PaginatedResponseHeaders
-import com.icarumbas.casto.coingecko.utils.PaginatedResponseWrapper
-import com.icarumbas.casto.core.utils.safeLet
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Component
-import org.springframework.web.client.RestTemplate
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
-
-@Component
-class ExchangesApi(
-    @Qualifier("CoinGecko")
-    private val restTemplate: RestTemplate
-) {
+interface ExchangesApi {
 
     /**
      * Get exchange tickers (paginated)
@@ -28,30 +18,9 @@ class ExchangesApi(
      * You are responsible for managing how you want to display these information
      * (e.g. footnote, different background, change opacity, hide)
      * */
-    fun getTickersForExchangeWithHeaders(
-        exchange: String,
-        page: Int
-    ): PaginatedResponseWrapper<CoinGeckoExchangeTickersResponse>? {
-        val responseRaw = getTickersForExchangeResponse(exchange, page)
-        val response = responseRaw.body
-        val headers = PaginatedResponseHeaders.extractFromResponse(responseRaw)
-        return safeLet(response, headers) { safeResponse, safeHeaders ->
-            PaginatedResponseWrapper(safeResponse, safeHeaders)
-        }
-    }
-
-    fun getTickersForExchange(exchange: String, page: Int): CoinGeckoExchangeTickersResponse? {
-        return getTickersForExchangeResponse(exchange, page).body
-    }
-
-    private fun getTickersForExchangeResponse(
-        exchange: String,
-        page: Int
-    ): ResponseEntity<CoinGeckoExchangeTickersResponse> {
-        val variables = mapOf("page" to page)
-        return restTemplate.getForEntity(
-            "exchanges/$exchange/tickers",
-            CoinGeckoExchangeTickersResponse::class.java, variables
-        )
-    }
+    @GET("exchanges/{exchange}/tickers")
+    fun tickersForExchange(
+        @Path("exchange") exchange: String,
+        @Query("page") page: Int
+    ): Call<CoinGeckoExchangeTickersResponse>
 }

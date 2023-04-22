@@ -1,6 +1,6 @@
+/*
 package com.icarumbas.casto.coingecko.coins.service
 
-import com.icarumbas.casto.coingecko.coins.api.CoinsApi
 import com.icarumbas.casto.coingecko.coins.models.entities.CoinIdEntity
 import com.icarumbas.casto.coingecko.coins.models.responses.CoinGeckoCoinIdItemResponse
 import com.icarumbas.casto.coingecko.storage.CoinIdsRepository
@@ -29,4 +29,4 @@ class CoinIdsService(
     private fun CoinGeckoCoinIdItemResponse.toCoinIdEntity(): CoinIdEntity {
         return CoinIdEntity(id, symbol)
     }
-}
+}*/

@@ -5,8 +5,11 @@ import com.icarumbas.casto.coingecko.exchanges.api.ExchangesApi
 import com.icarumbas.casto.coingecko.exchanges.models.responses.CoinGeckoTickerResponse
 import com.icarumbas.casto.coingecko.storage.CoinIdsRepository
 import com.icarumbas.casto.coingecko.utils.PaginatedDataLoader
+import com.icarumbas.casto.coingecko.utils.PaginatedResponseHeaders
+import com.icarumbas.casto.coingecko.utils.PaginatedResponseWrapper
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.lang.IllegalStateException
 
 
 @Service
@@ -20,8 +23,15 @@ class ExchangesService(
     fun loadBinanceTickers() {
         val dataLoader = PaginatedDataLoader()
         val data = dataLoader.run { page ->
-            requireNotNull(
-                exchangesApi.getTickersForExchangeWithHeaders(BINANCE_ID, page))
+            val response = exchangesApi.tickersForExchange(BINANCE_ID, page).execute()
+            if (response.isSuccessful) {
+                val headers = requireNotNull(
+                    PaginatedResponseHeaders.extractFromResponse(response)
+                )
+                PaginatedResponseWrapper(requireNotNull(response.body()), headers)
+            } else {
+                throw IllegalStateException(response.toString())
+            }
         }
         val coinIds = data.flatMap { response ->
             response.tickers

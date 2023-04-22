@@ -31,7 +31,7 @@ data class CoinGeckoTickerResponse(
     @SerialName("target")
     val target: String,
     @SerialName("target_coin_id")
-    val targetCoinId: String?,
+    val targetCoinId: String? = null,
     @SerialName("timestamp")
     val timestamp: String,
     @SerialName("trade_url")
